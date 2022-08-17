@@ -1,0 +1,170 @@
+<!doctype html>
+{% load static %}
+{% load post_tags %}
+<html lang="en">
+ <div class="container-fluid">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Voting System</title>
+    <link rel="stylesheet" href="{% static 'dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'headers.css' %}">
+    <img src="{% static 'images/qq22.jpg' %}" alt="sorry no image exist" height="110px" width="100%" >
+  </head>
+<body class="hold-transition sidebar-mini">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="{% url 'Announcement' %}">Home</a>
+    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="color:white">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {% if request.user.is_authenticated %}
+          {% else %}
+           <li  class="nav-item dropdown" style="padding-right: 10px">
+            <a class="nav-link px-2 text-white" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Campaigns</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown03">
+              <li><a class="dropdown-item" href="{% url 'Campaigns'  %}">Texts</a></li>
+              <li><a class="dropdown-item" href="{% url 'campaign_videos'  %}">Videos</a></li>
+            </ul>
+          </li>
+          <li  class="nav-item dropdown" style="padding-right: 10px">
+            <a class="nav-link px-2 text-white" href="#" id="dropdown02" data-bs-toggle="dropdown" aria-expanded="false">Users</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown03">
+              <li><a class="dropdown-item" href="{% url 'Candidates'  %}">Candidates</a></li>
+              <li><a class="dropdown-item" href="{% url 'Voters'  %}">Voters</a></li>
+              <li><a class="dropdown-item" href="{% url 'Committees'  %}">Election Committees</a></li>
+            </ul>
+          </li>
+           {% endif %}
+             {% if request.user|has_group:"Admin" %}
+           <li  class="nav-item dropdown" style="padding-right: 10px">
+            <a class="nav-link px-2 text-white" href="#" data-bs-toggle="dropdown" aria-expanded="false">Users</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown03">
+              <li><a class="dropdown-item" href="{% url 'showUser'  %}">Manage Administrators</a></li>
+              <li><a class="dropdown-item" href="{% url 'showUser'  %}">Manage Election Committee</a></li>
+            </ul>
+          </li>
+              <li style="padding-right: 10px"><a class="nav-link px-2 text-white" href="{% url 'ManageAnnouncement'%}">Announcements</a></li>
+           <li  class="nav-item dropdown" style="padding-right: 10px">
+            <a class="nav-link px-2 text-white" href="#" data-bs-toggle="dropdown" aria-expanded="false">Approve</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                  <li><a class="dropdown-item" href="{% url 'aprove'  %}">Approve Administrators Registration</a></li>
+                  <li><a class="dropdown-item" href="{% url 'aprove'  %}">Approve Election Committee</a></li>
+                  <li><a class="dropdown-item" href="{% url 'aprove'  %}">Approve Campaign</a></li>
+            </ul>
+          </li>
+              <li style="padding-right: 10px"><a class="nav-link px-2 text-white" href="{% url 'complains' %}">Response</a></li>
+            <li  class="nav-item dropdown" style="padding-right: 10px">
+            <a class="nav-link px-2 text-white" href="#" id="dropdown0" data-bs-toggle="dropdown" aria-expanded="false">Result</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown03">
+              <li><a class="dropdown-item" href="{% url 'ViewResult'  %}">Result 100%</a></li>
+              <li><a class="dropdown-item" href="{% url 'ViewResult40'  %}">Result 40%</a></li>
+                <li><a class="dropdown-item" href="{% url 'ViewResult60'  %}">Result 60%</a></li>
+            </ul>
+          </li>
+                {% endif %}
+            {% if request.user|has_group:"Committee" %}
+          <li  class="nav-item dropdown" style="padding-right: 10px">
+            <a class="nav-link px-2 text-white" href="#" data-bs-toggle="dropdown" aria-expanded="false">Manage</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                  <li><a class="dropdown-item" href="{% url 'aprove'  %}">Manage Voters Registration</a></li>
+                  <li><a class="dropdown-item" href="{% url 'aprove'  %}">manage Candidates Registration</a></li>
+                  <li><a class="dropdown-item" href="{% url 'aprove'  %}">Approve Campaign</a></li>
+            </ul>
+          </li>
+              <li style="padding-right: 10px"><a class="nav-link px-2 text-white" href="{% url 'ManageAnnouncement'%}">Announcements</a></li>
+           <li  class="nav-item dropdown" style="padding-right: 10px">
+                <a class="nav-link px-2 text-white" href="#" data-bs-toggle="dropdown" aria-expanded="false">Approve</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                  <li><a class="dropdown-item" href="{% url 'aprove'  %}">Approve Voter Registration</a></li>
+                  <li><a class="dropdown-item" href="{% url 'aprove'  %}">Approve Candidate Registration</a></li>
+                  <li><a class="dropdown-item" href="{% url 'aprove'  %}">Approve Campaign</a></li>
+            </ul>
+          </li>
+                   <li style="padding-right: 10px"><a class="nav-link px-2 text-white" href="{% url 'Schedules' %}">Schedules</a></li>
+                  <li style="padding-right: 10px"><a class="nav-link px-2 text-white" href="{% url 'CandidatesForEvaluation' %}">Evaluate</a></li>
+                  <li style="padding-right: 10px"><a class="nav-link px-2 text-white" href="#">Response</a></li>
+                   <li  class="nav-item dropdown" style="padding-right: 10px">
+            <a class="nav-link px-2 text-white" href="#" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false">Result</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown03">
+              <li><a class="dropdown-item" href="{% url 'ViewResult'  %}">Result 100%</a></li>
+              <li><a class="dropdown-item" href="{% url 'ViewResult40'  %}">Result 40%</a></li>
+                <li><a class="dropdown-item" href="{% url 'ViewResult60'  %}">Result 60%</a></li>
+            </ul>
+          </li>
+               {% endif %}
+          </li>
+          {% if request.user|has_group:"Candidate" %}
+                   <li style="padding-right: 10px"><a class="nav-link px-2 text-white" href="{% url 'complains' %}">Complains</a></li>
+           <li class="nav-item dropdown" style="padding-right: 10px">
+                    <a class="nav-link px-2 text-white" href="#"  data-bs-toggle="dropdown" aria-expanded="false">Campaign</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                        <li><a class="dropdown-item" href="{% url 'Campaign'  %}">Write Campaign </a></li>
+                      <li><a class="dropdown-item" href="{% url 'campaignUpload'  %}">Upload Campaign Video</a></li>
+                    </ul>
+                  </li>
+                   <li style="padding-right: 10px"><a class="nav-link px-2 text-white" href="{% url 'Exams' %}">Exam</a></li>
+                     <li  class="nav-item dropdown" style="padding-right: 10px">
+                        <a class="nav-link px-2 text-white" href="#" id="dropdown5" data-bs-toggle="dropdown" aria-expanded="false">Result</a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                          <li><a class="dropdown-item" href="{% url 'ViewResult'  %}">Result 100%</a></li>
+                          <li><a class="dropdown-item" href="{% url 'ViewResult40'  %}">Result 40%</a></li>
+                            <li><a class="dropdown-item" href="{% url 'ViewResult60'  %}">Result 60%</a></li>
+            </ul>
+          </li>
+                  <li class="nav-item dropdown" style="padding-right: 10px">
+                    <a class="nav-link px-2 text-white" href="#"  data-bs-toggle="dropdown" aria-expanded="false">Certificates</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                      <li><a class="dropdown-item" href="{% url 'certificates'  %}">View Certificates</a></li>
+                      <li><a class="dropdown-item" href="{% url 'DocumentUpload'  %}">Upload New Certificates</a></li>
+                    </ul>
+                  </li>
+            {% endif %}
+          {% if request.user|has_group:"Voter" %}
+                  <li style="padding-right: 10px"><a class="nav-link px-2 text-white" href="{% url 'complain' %}">Complain</a></li>
+                  <li style="padding-right: 10px"><a class="nav-link px-2 text-white" href="{% url 'Responses' %}">Complains</a></li>
+                  <li style="padding-right: 10px"><a class="nav-link px-2 text-white" href="{% url 'CandidatesForVote' %}">Vote</a></li>
+                  <li style="padding-right: 10px"><a class="nav-link px-2 text-white" href="{% url 'key_check' %}">Add Fingerprint</a></li>
+                 {% endif %}
+            {% if request.user.is_authenticated %}
+          {% else %}
+          <li class="nav-item dropdown" style="padding-right: 10px">
+            <a class="nav-link px-2 text-white" href="#"  data-bs-toggle="dropdown" aria-expanded="false">About</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown03">
+              <li><a class="dropdown-item" href="{% url 'mission'  %}">Mission</a></li>
+              <li><a class="dropdown-item" href="{% url 'vision'  %}">Vision</a></li>
+            </ul>
+          </li>
+          </li>
+          <li style="padding-right: 10px"><a href="{% url 'contactUs' %}" class="nav-link px-2 text-white">Contact Us</a></li>
+           {% endif %}
+      </ul>
+      <form class="d-flex">
+          <ul class="nav col-12 col-lg-auto me-lg-auto   mb-md-0">
+                    {% if request.user.is_authenticated %}
+                     <li><span id="hell_msg" style="color:red;">  Hello, {{request.user}} </span>
+                     <span> <a href="{% url 'logoutpage' %}" class="btn btn-success">logout</a></span></li>
+                    {% else %}
+                          <li style="padding-left: 7px"><a href="{% url 'Loginpage' %}" class="btn btn-success">Login</a></li>
+                          <li style="padding-left: 7px"><a  href="{% url 'signUp' %}" class="btn btn-secondary" >Sign-up</a></li>
+                          <li style="padding-left: 7px"><a href="{% url 'insertUser'%}" class="btn btn-primary">Register</a></li>
+                   {% endif %}
+                 </ul>
+      </form>
+    </div>
+  </div>
+</nav>
+</body>
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.min.js' %}"></script>
+<script src="{% static 'dist/js/bootstrap.bundle.min.js' %}"></script>
+  </div>
+</html>
+
+
+

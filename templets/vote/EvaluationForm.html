@@ -1,0 +1,56 @@
+{% load static %}
+{% load static %}
+<html>
+<head>
+	<title>Evaluate</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+     <link rel="stylesheet" type="text/css" href="{% static 'account.css' %}">
+	 {% include 'HomePage/MyNavbar.html'%}
+{% block body %}
+<div class="container h-100">
+		<div class="d-flex justify-content-center h-100">
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+
+
+					<h3 id="form-title">Evaluate</h3>
+				</div>
+				<div class="d-flex justify-content-center form_container">
+            <form method="post" action="">
+                {% csrf_token%}
+
+                 <div class="input-group mb-3">
+							<div class="input-group-append">
+							</div><h4 style="text-align: center;">Evaluate Candidate &nbsp</h4>  <h4 style="color:red;">{{username}}</h4>  &nbsp <h4>from 40%</h4></div>
+<!--                 <div class="input-group mb-3">-->
+<!--							<div class="input-group-append">-->
+<!--                                <span class="input-group-text"><div style="width:140px">Certifcate 5% &nbsp;</div><i class="fas fa-user"></i></span>-->
+<!--							 </div>{{form.certifcate}}</div>-->
+<!--                <div class="input-group mb-3">-->
+<!--							<div class="input-group-append">-->
+<!--                                <span class="input-group-text"><div style="width:140px">Written Exam 10% &nbsp;</div><i class="fas fa-user"></i></span>-->
+<!--							 </div>{{form.written_exam}}</div>-->
+                 <div class="input-group mb-3">
+							<div class="input-group-append">
+                                <span class="input-group-text"><div style="width:140px">Oral Interview 10% &nbsp;</div><i class="fas fa-user"></i></span>
+							 </div>{{form.oral_interview}}</div>
+                <div class="input-group mb-3">
+							<div class="input-group-append">
+                                <span class="input-group-text"><div style="width:140px">Strategic Plan &nbsp;</div><i class="fas fa-user"></i></span>
+                            </div >{{form.Str_and_opra_plane}}</div>
+                <div style="text-align:center;"> <input class="btn btn-success" type="submit" name="vote" value="Evaluate" style="text-align: center"></div>
+            </form>
+           	</div>
+				{% for message in messages %}
+				<p id="messages">{{message}}</p>
+
+				{% endfor %}
+		</div>
+	</div>
+	</div>{% endblock %}
+	 {% include 'HomePage/footer.html'%}
+
+
+

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+<style>
+    #hell_msg{
+    font-size:18px;
+    color:red;
+    }
+</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Candidates</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+     <link rel="stylesheet" type="text/css" href="{% static 'account.css' %}">
+	 {% include 'HomePage/MyNavbar.html'%}
+    <link rel="stylesheet" type="text/css" href="{% static 'styel.css' %}">
+</head>
+<div class="container-fluid">
+<body>
+<form method="post">
+<center>
+    <h3 id="form-title" >{{Title}}</h3>
+    <table border="1", width="70%">
+    <tr>
+        <th>username</th>
+        <th>User Fname</th>
+        <th>User Lname</th>
+        <th>User Gender</th>
+        <th>User Email</th>
+         <th>User Phone</th>
+    </tr>
+        {% for resu in candidates %}
+        <tr><td>{{resu.username}}</td>
+        <td>{{resu.user_fname}}</td>
+        <td>{{resu.user_lname}}</td>
+        <td>{{resu.user_gender}}</td>
+        <td>{{resu.user_email}}</td>
+        <td>{{resu.user_phone}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+     </form>
+</body>
+</div>
+ {% include 'HomePage/footer.html'%}
+</html>

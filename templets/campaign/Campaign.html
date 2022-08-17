@@ -1,0 +1,23 @@
+{% load static %}
+{% include 'HomePage/MyNavbar.html'%}
+{% block body %}
+<div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+        <div class="card card-body">
+            <form method="post" action="">
+                {% csrf_token%}
+                <label class="label label-default"> camp_by</label>  {{form.camp_by}}<br>
+                <label class="label label-default"> Campaign </label>  {{form.camp_title}}<br>
+                <label class="label label-default" > Campaign</label><br>  {{form.camp_dis}}<br>
+                <input class="btn btn-success" type="submit" name="campaign" value="Post">
+            </form>
+            {% endblock %}
+
+                </div>
+    </div>
+</div>
+{% include 'HomePage/footer.html'%}
+
+
